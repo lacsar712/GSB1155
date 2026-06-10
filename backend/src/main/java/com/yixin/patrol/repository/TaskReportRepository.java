@@ -29,4 +29,8 @@ public interface TaskReportRepository extends JpaRepository<TaskReport, Long> {
 
     @Query("SELECT COUNT(r) FROM TaskReport r WHERE r.reviewStatus = :status")
     Long countByReviewStatus(@Param("status") Integer status);
+
+    default Long countPendingReviews() {
+        return countByReviewStatus(0);
+    }
 }

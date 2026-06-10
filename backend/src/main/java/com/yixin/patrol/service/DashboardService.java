@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DashboardService {
+
+    private static final int STATUS_PENDING = 0;
+    private static final int STATUS_IN_PROGRESS = 1;
+    private static final int STATUS_COMPLETED = 3;
 
     @Autowired
     private PatrolTaskRepository taskRepository;
@@ -26,34 +31,49 @@ public class DashboardService {
     private TaskReportRepository reportRepository;
 
     public DashboardStats getStats() {
-        return DashboardStats.builder()
+        DashboardStats.DashboardStatsBuilder builder = DashboardStats.builder()
                 .totalTasks(taskRepository.count())
-                .pendingTasks(taskRepository.countByStatus(0))
-                .inProgressTasks(taskRepository.countByStatus(1))
-                .completedTasks(taskRepository.countByStatus(3))
-                .overdueCount((long) taskRepository.findOverdueTasks(LocalDateTime.now()).size())
-                .pendingReviewCount(reportRepository.countByReviewStatus(0))
+                .overdueCount(taskRepository.countOverdueTasks(LocalDateTime.now()))
+                .pendingReviewCount(reportRepository.countPendingReviews())
                 .totalUsers(userRepository.countActiveUsers())
                 .totalSchools(organizationRepository.countByOrgType(2))
-                .totalTemplates(templateRepository.countActive())
-                .build();
+                .totalTemplates(templateRepository.countActive());
+        applyTaskStatusCounts(builder, taskRepository.countTaskStatusBreakdown());
+        return builder.build();
     }
 
     public DashboardStats getStatsByOrg(Long orgId) {
-        return DashboardStats.builder()
-                .totalTasks((long) taskRepository.findByOrgId(orgId).size())
-                .pendingTasks(taskRepository.countByOrgIdAndStatus(orgId, 0))
-                .inProgressTasks(taskRepository.countByOrgIdAndStatus(orgId, 1))
-                .completedTasks(taskRepository.countByOrgIdAndStatus(orgId, 3))
-                .build();
+        DashboardStats.DashboardStatsBuilder builder = DashboardStats.builder()
+                .totalTasks(taskRepository.countByOrgId(orgId));
+        applyTaskStatusCounts(builder, taskRepository.countTaskStatusBreakdownByOrgId(orgId));
+        return builder.build();
     }
 
     public DashboardStats getStatsForExecutor(Long executorId) {
-        return DashboardStats.builder()
-                .totalTasks((long) taskRepository.findByExecutorId(executorId).size())
-                .pendingTasks(taskRepository.countByExecutorIdAndStatus(executorId, 0))
-                .inProgressTasks(taskRepository.countByExecutorIdAndStatus(executorId, 1))
-                .completedTasks(taskRepository.countByExecutorIdAndStatus(executorId, 3))
-                .build();
+        DashboardStats.DashboardStatsBuilder builder = DashboardStats.builder()
+                .totalTasks(taskRepository.countByExecutorId(executorId));
+        applyTaskStatusCounts(builder, taskRepository.countTaskStatusBreakdownByExecutorId(executorId));
+        return builder.build();
+    }
+
+    private void applyTaskStatusCounts(DashboardStats.DashboardStatsBuilder builder,
+                                       List<Object[]> statusRows) {
+        long pending = 0L;
+        long inProgress = 0L;
+        long completed = 0L;
+        for (Object[] row : statusRows) {
+            Integer status = (Integer) row[0];
+            Long count = (Long) row[1];
+            if (status == STATUS_PENDING) {
+                pending = count;
+            } else if (status == STATUS_IN_PROGRESS) {
+                inProgress = count;
+            } else if (status == STATUS_COMPLETED) {
+                completed = count;
+            }
+        }
+        builder.pendingTasks(pending)
+               .inProgressTasks(inProgress)
+               .completedTasks(completed);
     }
 }
