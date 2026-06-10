@@ -45,6 +45,13 @@ public interface PatrolTaskRepository extends JpaRepository<PatrolTask, Long> {
     @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.executorId = :executorId AND t.status = :status")
     Long countByExecutorIdAndStatus(@Param("executorId") Long executorId, @Param("status") Integer status);
 
+    Long countByOrgId(Long orgId);
+
+    Long countByExecutorId(Long executorId);
+
+    @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.deadline < :now AND t.status IN (0, 1)")
+    Long countOverdueTasks(@Param("now") LocalDateTime now);
+
     @Query("SELECT t FROM PatrolTask t ORDER BY t.createTime DESC")
     Page<PatrolTask> findAllOrderByCreateTimeDesc(Pageable pageable);
 
