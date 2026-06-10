@@ -1,0 +1,56 @@
+<view class="page report-page">
+  <view class="card header-card">
+    <view class="header-label">当前任务</view>
+    <view class="header-title">{{title || ('任务 #' + taskId)}}</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="field">
+      <view class="label">巡检位置</view>
+      <input
+        class="input"
+        placeholder="例如：教学楼 A 栋 3 层"
+        value="{{location}}"
+        data-field="location"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="label">上报内容</view>
+      <textarea
+        class="textarea"
+        placeholder="填写巡检过程、发现问题和处理动作"
+        value="{{reportContent}}"
+        data-field="reportContent"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="label">检查结果摘要</view>
+      <textarea
+        class="textarea"
+        placeholder="例如：消防设施完好，二楼配电箱需要整改"
+        value="{{checkResultText}}"
+        data-field="checkResultText"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="label">现场图片 URL</view>
+      <textarea
+        class="textarea textarea-sm"
+        placeholder="可输入多行或英文逗号分隔的图片地址"
+        value="{{imageText}}"
+        data-field="imageText"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <button class="primary-button submit-button" loading="{{loading}}" bindtap="submitReport">
+      {{loading ? '提交中...' : '提交巡检上报'}}
+    </button>
+  </view>
+</view>

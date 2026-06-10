@@ -1,0 +1,22 @@
+page {
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 28rpx;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 12rpx 48rpx rgba(15, 23, 42, 0.08);
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border: none;
+}

@@ -1,0 +1,63 @@
+<view class="page tasks-page">
+  <view class="header card">
+    <view>
+      <view class="header-title">我的巡检任务</view>
+      <view class="header-subtitle">{{user.realName || user.username}}，请及时处理待执行任务。</view>
+    </view>
+    <view class="logout" bindtap="logout">退出</view>
+  </view>
+
+  <scroll-view scroll-x class="filter-scroll" show-scrollbar="{{false}}">
+    <view class="filter-list">
+      <view
+        wx:for="{{filters}}"
+        wx:key="value"
+        class="filter-item {{activeFilter === item.value ? 'active' : ''}}"
+        data-filter="{{item.value}}"
+        bindtap="changeFilter"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{loading}}" class="loading">任务加载中...</view>
+
+  <view wx:elif="{{filteredTasks.length === 0}}" class="empty card">
+    <view class="empty-title">暂无任务</view>
+    <view class="empty-subtitle">当前筛选条件下没有可展示的数据。</view>
+  </view>
+
+  <view wx:else class="task-list">
+    <view wx:for="{{filteredTasks}}" wx:key="id" class="task-card card">
+      <view class="task-head">
+        <view class="task-title">{{item.title}}</view>
+        <view class="task-status status-{{item.status}}">{{item.statusText}}</view>
+      </view>
+
+      <view class="task-meta">执行单位：{{item.orgName || '-'}}</view>
+      <view class="task-meta">截止时间：{{item.deadline || '-'}}</view>
+      <view class="task-desc">{{item.description || '暂无任务描述'}}</view>
+
+      <view class="task-actions">
+        <button
+          wx:if="{{item.status === 0}}"
+          class="action-button secondary-button"
+          data-id="{{item.id}}"
+          bindtap="startTask"
+        >
+          开始执行
+        </button>
+        <button
+          wx:if="{{item.status === 1 || item.status === 4}}"
+          class="action-button primary-button"
+          data-id="{{item.id}}"
+          data-title="{{item.title}}"
+          bindtap="goReport"
+        >
+          提交上报
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

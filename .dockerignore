@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# 构建
+dist
+build
+target
+
+# 环境
+.env
+.env.*
+
+# 其他
+*.md
+*.log
+.DS_Store
+Thumbs.db

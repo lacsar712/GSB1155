@@ -1,0 +1,155 @@
+.tasks-page {
+  padding: 24rpx 24rpx 48rpx;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  color: #ffffff;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  margin-top: 12rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.logout {
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 12rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.filter-scroll {
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.filter-list {
+  display: inline-flex;
+  gap: 16rpx;
+}
+
+.filter-item {
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 24rpx;
+}
+
+.filter-item.active {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.loading,
+.empty {
+  padding: 48rpx 32rpx;
+  text-align: center;
+  color: #64748b;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.empty-subtitle {
+  margin-top: 16rpx;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.task-card {
+  padding: 28rpx;
+}
+
+.task-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #111827;
+}
+
+.task-status {
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+}
+
+.status-0 {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-1 {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-2 {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.status-3 {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-4 {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.task-meta,
+.task-desc {
+  margin-top: 14rpx;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.task-actions {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-button {
+  margin: 0;
+  min-width: 220rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+
+.secondary-button {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: none;
+}

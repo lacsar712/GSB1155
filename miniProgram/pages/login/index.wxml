@@ -1,0 +1,38 @@
+<view class="page login-page">
+  <view class="hero">
+    <view class="hero-badge">Mini Program</view>
+    <view class="hero-title">移动巡检上报</view>
+    <view class="hero-subtitle">使用原生微信小程序完成任务领取、执行和上报。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">账号登录</view>
+
+    <view class="field">
+      <view class="label">用户名</view>
+      <input
+        class="input"
+        placeholder="请输入用户名"
+        value="{{username}}"
+        data-field="username"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="label">密码</view>
+      <input
+        class="input"
+        password
+        placeholder="请输入密码"
+        value="{{password}}"
+        data-field="password"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <button class="primary-button submit-button" loading="{{loading}}" bindtap="submitLogin">
+      {{loading ? '登录中...' : '登录'}}
+    </button>
+  </view>
+</view>

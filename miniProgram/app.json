@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/tasks/index",
+    "pages/report/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "蚁心安巡",
+    "navigationBarBackgroundColor": "#2563eb",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f3f4f6",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

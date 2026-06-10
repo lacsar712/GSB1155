@@ -1,0 +1,59 @@
+.report-page {
+  padding: 24rpx;
+}
+
+.header-card,
+.form-card {
+  padding: 28rpx;
+}
+
+.header-card {
+  margin-bottom: 20rpx;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+}
+
+.header-label {
+  font-size: 24rpx;
+  color: #2563eb;
+}
+
+.header-title {
+  margin-top: 12rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #0f172a;
+}
+
+.field + .field {
+  margin-top: 24rpx;
+}
+
+.label {
+  margin-bottom: 12rpx;
+  color: #374151;
+  font-size: 26rpx;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24rpx;
+  border-radius: 18rpx;
+  background: #f8fafc;
+  border: 2rpx solid #e5e7eb;
+}
+
+.textarea {
+  min-height: 200rpx;
+}
+
+.textarea-sm {
+  min-height: 144rpx;
+}
+
+.submit-button {
+  margin-top: 32rpx;
+  border-radius: 18rpx;
+}
