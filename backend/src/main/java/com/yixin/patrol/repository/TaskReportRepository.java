@@ -3,7 +3,6 @@ package com.yixin.patrol.repository;
 import com.yixin.patrol.entity.TaskReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,6 +26,8 @@ public interface TaskReportRepository extends JpaRepository<TaskReport, Long> {
     @Query("SELECT r FROM TaskReport r WHERE r.reviewStatus = 0 ORDER BY r.reportTime DESC")
     List<TaskReport> findPendingReviews();
 
-    @Query("SELECT COUNT(r) FROM TaskReport r WHERE r.reviewStatus = :status")
-    Long countByReviewStatus(@Param("status") Integer status);
+    /**
+     * 按复核状态计数。使用 Spring Data 派生查询，对应 SQL 为 SELECT COUNT(*)，避免拉取全量数据。
+     */
+    Long countByReviewStatus(Integer reviewStatus);
 }

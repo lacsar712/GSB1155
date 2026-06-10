@@ -136,7 +136,7 @@ public class PatrolTaskService {
     }
 
     public Long countOverdueTasks() {
-        return (long) taskRepository.findOverdueTasks(LocalDateTime.now()).size();
+        return taskRepository.countOverdueTasks(LocalDateTime.now());
     }
 
     public Long countTotal() {
