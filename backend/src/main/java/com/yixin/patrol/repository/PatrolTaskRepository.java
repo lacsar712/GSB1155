@@ -48,6 +48,24 @@ public interface PatrolTaskRepository extends JpaRepository<PatrolTask, Long> {
     @Query("SELECT t FROM PatrolTask t ORDER BY t.createTime DESC")
     Page<PatrolTask> findAllOrderByCreateTimeDesc(Pageable pageable);
 
+    @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.deadline < :now AND t.status IN (0, 1)")
+    Long countOverdueTasks(@Param("now") LocalDateTime now);
+
+    @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.orgId = :orgId")
+    Long countByOrgId(@Param("orgId") Long orgId);
+
+    @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.executorId = :executorId")
+    Long countByExecutorId(@Param("executorId") Long executorId);
+
+    @Query("SELECT t.status, COUNT(t) FROM PatrolTask t GROUP BY t.status")
+    List<Object[]> countGroupByStatus();
+
+    @Query("SELECT t.status, COUNT(t) FROM PatrolTask t WHERE t.orgId = :orgId GROUP BY t.status")
+    List<Object[]> countGroupByStatusByOrgId(@Param("orgId") Long orgId);
+
+    @Query("SELECT t.status, COUNT(t) FROM PatrolTask t WHERE t.executorId = :executorId GROUP BY t.status")
+    List<Object[]> countGroupByStatusByExecutorId(@Param("executorId") Long executorId);
+
     @Query("SELECT COUNT(t) FROM PatrolTask t WHERE t.deadline BETWEEN :start AND :end AND t.status IN (0, 1)")
     Long countUpcomingDeadlines(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
